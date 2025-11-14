@@ -1,0 +1,48 @@
+macs.sh
+=======
+Recopila todas las direcciones MAC que detecta en la red y las vuelca en el fichero macs.txt
+Para obtener solo las macs de un aula es preciso que se ejecute en un entorno aislado desconectando el cable que conecta el aula con el exterior
+IMPORTANTE: antes de desconectar ese cable los equipos deben de haber arrancado y obtenido una IP. En caso contrario el script no funcionará correctamente
+Precisa de privilegios de administrador y que en el equipo desde donde se ejecuta estén instalados nmap y arp-scan
+Sólo es preciso que se ejecute cuando hay cambios en el aula (equipos nuevos, retirados, etc.)
+Es parametrizable editando las primeras lineas del script:
+
+OUT_FILE="macs.txt"
+IFACE="enp2s0"
+TARGET="10.230.98.0/23" 
+
+ips.txt
+=======
+Lee del fichero macs.txt y genera otro fichero que se llama ips.txt con las direcciones ips correspondientes a las macs listadas
+No hay que desconectar la salida del aula puesto que solo identifica a los equipos listados en macs.txt
+Precisa de privilegios de administrador y que en el equipo desde donde se ejecuta estén instalados nmap y arp-scan
+Es parametrizable editando las primeras lineas del script:
+
+MAC_FILE="macs.txt"
+OUT_FILE="ips.txt"
+IFACE="enp2s0"
+
+hostnames.sh
+============
+Lee del fichero ips.txt y genera otro fichero que se llama hostnames.txt con los nombres de host asociado a esas IPs
+El fichero está ordenado alfabeticamente por hostname
+No hay que desconectar la salida del aula puesto que solo identifica a los equipos listados en ips.txt
+No precisa de privilegios de administrador
+En el equipo desde donde se ejecuta debe de estar instalado sshpass
+El script sirve también para hacer una prueba de conexión remota por ssh. Todos los equipos tienen que tener el mismo usuario y contraseña
+Si alguno de los equipos falla en la conexión o en la extracción del hostname aparecerá como ERROR en el listado
+Hay que meter usuario y contraseña en línea en la ejecución:
+
+./hostnames.ssh <usuario> <contraseña>
+
+Es parametrizable editando las primeras líneas del script:
+
+USUARIO="$1"
+PASSWORD="$2"
+ARCHIVO="ips.txt"
+SALIDA="hostnames.txt"
+
+Para evitar que haya que escribir la contraseña se ponen usuario y contraseña como parametros de entrada.
+Si se quiere prescindir de ese extra de seguridad se pueden editar en las variables USUARIO Y PASSWORD 
+
+
