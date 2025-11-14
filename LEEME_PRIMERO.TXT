@@ -11,8 +11,8 @@ OUT_FILE="macs.txt"
 IFACE="enp2s0"
 TARGET="10.230.98.0/23" 
 
-ips.txt
-=======
+ips.sh
+======
 Lee del fichero macs.txt y genera otro fichero que se llama ips.txt con las direcciones ips correspondientes a las macs listadas
 No hay que desconectar la salida del aula puesto que solo identifica a los equipos listados en macs.txt
 Precisa de privilegios de administrador y que en el equipo desde donde se ejecuta estén instalados nmap y arp-scan
